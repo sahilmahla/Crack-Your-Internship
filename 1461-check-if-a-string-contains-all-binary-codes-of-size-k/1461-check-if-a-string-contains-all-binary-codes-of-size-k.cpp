@@ -11,6 +11,6 @@ public:
             res.insert(s.substr(i,k));
         }
         
-        return res.size() == pow(2,k);
+        return res.size() >= pow(2,k);
     }
 };
