@@ -10,28 +10,47 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-        // Code here
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        // // Code here
+        // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        // vector<int> dist(V,1e9);
+        // dist[S] = 0;
+        // pq.push({0,S});
+        // while(!pq.empty()){
+        //     int d  =  pq.top().first;
+        //     int node = pq.top().second;
+        //     pq.pop();
+            // for(auto it: adj[node]){
+            //     int edgeWt = it[1];
+            //     int adjNode = it[0];
+            //     if(d+edgeWt < dist[adjNode]){
+            //         dist[adjNode] = d+edgeWt;
+            //         pq.push({dist[adjNode],adjNode});
+            //     }
+            // }
+            
+        // }
+        // return dist;
+        
+        set<pair<int,int>> st;
         vector<int> dist(V,1e9);
+        st.insert({0,S});
         dist[S] = 0;
-        pq.push({0,S});
-        while(!pq.empty()){
-            int d  =  pq.top().first;
-            int node = pq.top().second;
-            pq.pop();
+        while(!st.empty()){
+            auto it = *(st.begin());
+            int d = it.first;
+            int node = it.second;
+            st.erase(it);
             for(auto it: adj[node]){
                 int edgeWt = it[1];
                 int adjNode = it[0];
                 if(d+edgeWt < dist[adjNode]){
+                    
                     dist[adjNode] = d+edgeWt;
-                    pq.push({dist[adjNode],adjNode});
+                    st.insert({dist[adjNode],adjNode});
                 }
-            }
-            
+            }            
         }
         return dist;
-        
-        
     }
 };
 
